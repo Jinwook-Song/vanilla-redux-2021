@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { actionCreators } from "../store";
 
-function Home({ toDos }) {
+function Home({ toDos, addToDo }) {
   const [text, setText] = useState("");
   function onChange(event) {
     setText(event.target.value);
   }
   function onSubmit(event) {
     event.preventDefault();
+    addToDo(text);
     setText("");
   }
 
@@ -32,5 +34,11 @@ function mapStateToProps(state) {
   return { toDos: state };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+  };
+}
+
 // eslint-disable-next-line
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
