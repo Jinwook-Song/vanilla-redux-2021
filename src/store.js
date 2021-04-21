@@ -13,8 +13,8 @@ const addToDo = (text) => {
 
 const deleteToDo = (id) => {
   return {
-    type: ADD,
-    id,
+    type: DELETE,
+    id: parseInt(id),
   };
 };
 
