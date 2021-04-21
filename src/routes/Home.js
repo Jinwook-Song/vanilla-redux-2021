@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 
-function Home() {
+function Home({ toDos }) {
   const [text, setText] = useState("");
   function onChange(event) {
     setText(event.target.value);
@@ -22,10 +23,14 @@ function Home() {
         />
         <button>Add</button>
       </form>
-      <ul></ul>
+      <ul>{JSON.stringify(toDos)}</ul>
     </>
   );
 }
 
+function mapStateToProps(state) {
+  return { toDos: state };
+}
+
 // eslint-disable-next-line
-export default Home;
+export default connect(mapStateToProps)(Home);
